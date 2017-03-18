@@ -1,0 +1,5 @@
+c:\users\sigecloud\documents\visual studio 2015\Projects\CalculadoraIMC\CalculadoraIMC\bin\Debug\CalculadoraIMC.exe.config
+C:\Users\SigeCloud\Documents\Visual Studio 2015\Projects\CalculadoraIMC\CalculadoraIMC\bin\Debug\CalculadoraIMC.exe
+C:\Users\SigeCloud\Documents\Visual Studio 2015\Projects\CalculadoraIMC\CalculadoraIMC\bin\Debug\CalculadoraIMC.pdb
+C:\Users\SigeCloud\Documents\Visual Studio 2015\Projects\CalculadoraIMC\CalculadoraIMC\obj\Debug\CalculadoraIMC.exe
+C:\Users\SigeCloud\Documents\Visual Studio 2015\Projects\CalculadoraIMC\CalculadoraIMC\obj\Debug\CalculadoraIMC.pdb
