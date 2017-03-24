@@ -11,80 +11,53 @@ namespace CalculadoraIMC
     class Program
     {
 
-        static void hrhrh()
-        {
-            int[] x = { 1, 2, 3, 4, 5 };
-
-            try
-            {
-                for (int o = 0; o < 6; o++)
-                {
-                    Console.WriteLine(x[o] + Environment.NewLine);
-                }
-            }
-            catch (IndexOutOfRangeException ix)
-            {
-                Console.WriteLine("O salario nãopode ser aumentado, faça manumente");
-                // despafaeraumento();
-            }
-            catch (Exception ex)
-            {
-            }
-
-            var bananai = 0;
-            while (bananai < 5)
-            {
-                Console.WriteLine(x[bananai] + Environment.NewLine);
-                bananai++;
-            }
-        }
-
+      
 
         public static void Main(string[] args)
         {
-            hrhrh();
-            Console.ReadLine();
-            return;
+           
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US"); //muda para cultura EUA, para utilizar ponto ao invés de vírgula
 
             //criação variáveis
-            double peso;
-            double altura;
-            double imc;
+            double peso=0;
+            double altura=0;
+            double imc=0;
 
             //tabela informativa
             Console.WriteLine("                        TESTE IMC  " + Environment.NewLine);
-            //Console.WriteLine("");
             Console.WriteLine("       IMC              CLASSIFICAÇÃO     RISCO DE DOENÇA" + Environment.NewLine);
-            //Console.WriteLine("");
             Console.WriteLine("Menos de 18,5           Magreza             Elevado");
             Console.WriteLine("Entre 18,5 e 24,9       Normal	            --------");
             Console.WriteLine("Entre 25 e 29,9	        Sobrepeso	    Elevado");
             Console.WriteLine("Entre 30 e 39,9	        Obesidade	    Muito elevado");
             Console.WriteLine("Igual ou maior de 40    Obesidade grave	    Muitíssimo elevado" + Environment.NewLine);
-            //Console.WriteLine("");
 
             //pedir peso
             Console.WriteLine("Insira o seu peso:");
             peso = Convert.ToDouble(Console.ReadLine());
-
-            if (peso > 300 || peso < 30) //verifica se o peso é inválido
+            while (peso > 300 || peso < 30)
             {
-                Console.WriteLine("Seu peso é inválido");
-                Console.ReadLine();
-                return;
+                Console.WriteLine(Environment.NewLine + "Mensagem de erro" + Environment.NewLine);
+                Console.WriteLine("Insira o seu peso:");
+                peso = Convert.ToDouble(Console.ReadLine());
             }
+
+
+
 
             //pedir altura
+
             Console.WriteLine("Insira sua altura");
             altura = Convert.ToDouble(Console.ReadLine());
-
-            if (altura > 3.0 || altura < 1.20) //verifica se a altura é inválida
+            while (altura > 3.0 || altura < 1.20)
             {
-                Console.WriteLine("Sua altura é inválida");
-                Console.ReadLine();
-                return;
+                Console.WriteLine(Environment.NewLine + "Mensagem de erro" + Environment.NewLine);
+                Console.WriteLine("Insira sua altura");
+                altura = Convert.ToDouble(Console.ReadLine());
+                
             }
+            
+            
 
             //calculo do IMC
             imc = peso / (altura * altura);
