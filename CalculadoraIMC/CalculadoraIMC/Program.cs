@@ -15,8 +15,9 @@ namespace CalculadoraIMC
 
         public static void Main(string[] args)
         {
-           
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US"); //muda para cultura EUA, para utilizar ponto ao invés de vírgula
+
+            //muda para cultura EUA, para utilizar ponto ao invés de vírgula
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
 
             //criação variáveis
             double peso=0;
@@ -34,6 +35,9 @@ namespace CalculadoraIMC
             Console.WriteLine("Igual ou maior de 40    Obesidade grave	    Muitíssimo elevado" + Environment.NewLine);
 
             //pedir idade
+            //input serve armazenar o valor inserido em uma string, para verificar se são apenas números
+            //TryParse tentar converter, se não conseguir retornará como falso e substituirá por 0 (idade inválida) então entrará no while
+            //Environment independente do ambiente (sistema operacional) em que ele está, criará uma nova linha
             Console.WriteLine("Insira sua idade:");
             string inputIdade = Console.ReadLine();
             if (int.TryParse(inputIdade, out idade) == false)
@@ -89,7 +93,8 @@ namespace CalculadoraIMC
             imc = peso / (altura * altura);
 
             //arredondar IMC para uma casa decimal
-            imc = Math.Round(imc, 1); //imc recebe imc com 1 casa decimal só
+            //IMC recebe IMC com 1 casa decimal só
+            imc = Math.Round(imc, 1); 
 
             //testes IMC
             if (imc < 18.5)
