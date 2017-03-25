@@ -22,6 +22,7 @@ namespace CalculadoraIMC
             double peso=0;
             double altura=0;
             double imc=0;
+            int idade = 0;
 
             //tabela informativa
             Console.WriteLine("                        TESTE IMC  " + Environment.NewLine);
@@ -35,7 +36,16 @@ namespace CalculadoraIMC
             //pedir idade
             Console.WriteLine("Insira sua idade:");
             string inputIdade = Console.ReadLine();
-
+            if (int.TryParse(inputIdade, out idade) == false)
+                idade = 0;
+            while (idade < 20 || idade > 65)
+            {
+                Console.WriteLine(Environment.NewLine + "Este IMC é apenas para adultos entre 20 e 65 anos!" + Environment.NewLine);
+                Console.WriteLine("Insira sua idade:");
+                inputIdade = Console.ReadLine();
+                if (int.TryParse(inputIdade, out idade) == false)
+                    idade = 0;
+            }
 
             //pedir peso
             Console.WriteLine("Insira o seu peso:");
