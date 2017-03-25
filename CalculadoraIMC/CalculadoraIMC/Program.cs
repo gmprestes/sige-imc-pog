@@ -32,33 +32,49 @@ namespace CalculadoraIMC
             Console.WriteLine("Entre 30 e 39,9	        Obesidade	    Muito elevado");
             Console.WriteLine("Igual ou maior de 40    Obesidade grave	    Muitíssimo elevado" + Environment.NewLine);
 
+            //pedir idade
+            Console.WriteLine("Insira sua idade:");
+            string inputIdade = Console.ReadLine();
+
+
             //pedir peso
             Console.WriteLine("Insira o seu peso:");
-            peso = Convert.ToDouble(Console.ReadLine());
+            String inputPeso = Console.ReadLine();
+            inputPeso = inputPeso.Replace(',', '.');
+            if (double.TryParse(inputPeso, out peso) == false)
+                peso = 0;
             while (peso > 300 || peso < 30)
             {
-                Console.WriteLine(Environment.NewLine + "Mensagem de erro" + Environment.NewLine);
+                Console.WriteLine(Environment.NewLine + "Seu peso é inválido!" + Environment.NewLine);
                 Console.WriteLine("Insira o seu peso:");
-                peso = Convert.ToDouble(Console.ReadLine());
+                inputPeso = Console.ReadLine();
+                inputPeso = inputPeso.Replace(',', '.');
+                if (double.TryParse(inputPeso, out peso) == false)
+                    peso = 0;
             }
 
-
+            
 
 
             //pedir altura
 
             Console.WriteLine("Insira sua altura");
-            altura = Convert.ToDouble(Console.ReadLine());
+            string inputAltura = Console.ReadLine();
+            inputAltura = inputAltura.Replace(',', '.');
+            if (double.TryParse(inputAltura, out altura) == false)
+                altura = 0;
+   
             while (altura > 3.0 || altura < 1.20)
             {
-                Console.WriteLine(Environment.NewLine + "Mensagem de erro" + Environment.NewLine);
+                Console.WriteLine(Environment.NewLine + "Sua altura é inválida!" + Environment.NewLine);
                 Console.WriteLine("Insira sua altura");
-                altura = Convert.ToDouble(Console.ReadLine());
-                
+                inputAltura = Console.ReadLine();
+                inputAltura = inputAltura.Replace(',', '.');
+                if (double.TryParse(inputAltura, out altura) == false)
+                    altura = 0;
             }
             
-            
-
+         
             //calculo do IMC
             imc = peso / (altura * altura);
 
