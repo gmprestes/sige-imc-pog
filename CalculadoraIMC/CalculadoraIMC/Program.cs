@@ -74,7 +74,7 @@ namespace CalculadoraIMC
             if (double.TryParse(inputAltura, out altura) == false)
                 altura = 0;
    
-            while (altura > 3.0 || altura < 1.20)
+            while (altura > 2.8 || altura < 1)
             {
                 Console.WriteLine(Environment.NewLine + "Sua altura é inválida!" + Environment.NewLine);
                 Console.WriteLine("Insira sua altura");
