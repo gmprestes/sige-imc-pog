@@ -3,3 +3,9 @@ C:\Users\SigeCloud\Documents\Visual Studio 2015\Projects\CalculadoraIMC\Calculad
 C:\Users\SigeCloud\Documents\Visual Studio 2015\Projects\CalculadoraIMC\CalculadoraIMC\bin\Debug\CalculadoraIMC.pdb
 C:\Users\SigeCloud\Documents\Visual Studio 2015\Projects\CalculadoraIMC\CalculadoraIMC\obj\Debug\CalculadoraIMC.exe
 C:\Users\SigeCloud\Documents\Visual Studio 2015\Projects\CalculadoraIMC\CalculadoraIMC\obj\Debug\CalculadoraIMC.pdb
+C:\Users\SIGE Cloud\Source\Repos\sige-imc-pog\CalculadoraIMC\CalculadoraIMC\bin\Debug\CalculadoraIMC.exe.config
+C:\Users\SIGE Cloud\Source\Repos\sige-imc-pog\CalculadoraIMC\CalculadoraIMC\obj\Debug\CalculadoraIMC.exe
+C:\Users\SIGE Cloud\Source\Repos\sige-imc-pog\CalculadoraIMC\CalculadoraIMC\obj\Debug\CalculadoraIMC.pdb
+C:\Users\SIGE Cloud\Source\Repos\sige-imc-pog\CalculadoraIMC\CalculadoraIMC\bin\Debug\CalculadoraIMC.exe
+C:\Users\SIGE Cloud\Source\Repos\sige-imc-pog\CalculadoraIMC\CalculadoraIMC\bin\Debug\CalculadoraIMC.pdb
+C:\Users\SIGE Cloud\Source\Repos\sige-imc-pog\CalculadoraIMC\CalculadoraIMC\obj\Debug\CalculadoraIMC.csprojResolveAssemblyReference.cache

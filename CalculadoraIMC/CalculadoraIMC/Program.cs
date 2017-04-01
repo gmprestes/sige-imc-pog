@@ -24,7 +24,8 @@ namespace CalculadoraIMC
             double altura=0;
             double imc=0;
             int idade = 0;
-
+            ClassePessoa[] pessoas= new ClassePessoa[2];
+            
             //tabela informativa
             Console.WriteLine("                        TESTE IMC  " + Environment.NewLine);
             Console.WriteLine("       IMC              CLASSIFICAÇÃO     RISCO DE DOENÇA" + Environment.NewLine);
@@ -50,7 +51,8 @@ namespace CalculadoraIMC
                 if (int.TryParse(inputIdade, out idade) == false)
                     idade = 0;
             }
-
+            ClassePessoa pessoa = new ClassePessoa(idade);
+            pessoas[0] = pessoa;
             //pedir peso
             Console.WriteLine("Insira o seu peso:");
             String inputPeso = Console.ReadLine();
@@ -64,10 +66,10 @@ namespace CalculadoraIMC
                 inputPeso = Console.ReadLine();
                 inputPeso = inputPeso.Replace(',', '.');
                 if (double.TryParse(inputPeso, out peso) == false)
-                    peso = 0;
+                     peso = 0;
             }
 
-            
+            pessoa.Peso = peso;
 
 
             //pedir altura
@@ -87,14 +89,10 @@ namespace CalculadoraIMC
                 if (double.TryParse(inputAltura, out altura) == false)
                     altura = 0;
             }
-            
-         
-            //calculo do IMC
-            imc = peso / (altura * altura);
+            pessoa.Altura = altura;
 
-            //arredondar IMC para uma casa decimal
-            //IMC recebe IMC com 1 casa decimal só
-            imc = Math.Round(imc, 1); 
+            //calculo do IMC
+            imc = pessoa.CalculaIMC();
 
             //testes IMC
             if (imc < 18.5)
@@ -110,6 +108,17 @@ namespace CalculadoraIMC
 
             Console.ReadLine();
             return;
+            //perguntar quantas pessoas deseja calcular - array
+            //metodo para pedir qual pessoa olhar o imc
+            //prog não acaba
+            //até caracter especial
+            //fechar aplicação
+            //windows Forms
+            //possibilidade de digitar a possibilidade de digitar TROCAR
+            //pedir dados da pessoa da qual eu desejo substituir pelo nome da pessoa
+            //não possuir dois João
+            //por sexo
+
 
         }
     }
