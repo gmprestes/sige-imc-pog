@@ -10,7 +10,16 @@ namespace CalculadoraIMC
 {
     public class ClassePessoa
     {
-        //nome
+        public string Nome
+        {
+            get;
+            set;
+        }
+        public string Sobrenome
+        {
+            get;
+            set;
+        }
         public int Idade
         {
             get;
