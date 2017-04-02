@@ -11,10 +11,18 @@ namespace CalculadoraIMC
     class Program
     {
 
-      
-
         public static void Main(string[] args)
         {
+            /*Tarefas
+             * Perguntar de quantas pessoas se deseja calcular o IMC - armazenar em um array OK
+             * Implementar método para perguntar de qual pessoa deseja olhar o IMC (por nome, nome+sobrenome ou número)
+             * Manter o programa em execução até que o usuário digite SAIR
+             * Caso o usuário digite a palavra TROCAR, programa deve permitir que ele escolha(por nome ou número, de qual pessoa deseja trocar os dados)
+             * Verificar no cadastro da pessoa e na hora de trocar informações que não exista nenhum nome+sobrenome igual
+             * Calcular IMC por sexo
+             * Modificar mensagens ao usuário(algumas estão para apenas uma pessoa, não se aplicando ao novo modelo)
+             * Pesquisar e implementar tabelas de IMC para homens e para mulheres e suas diferenças
+             */
 
             //muda para cultura EUA, para utilizar ponto ao invés de vírgula
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -22,16 +30,16 @@ namespace CalculadoraIMC
             //criação variáveis
             string nome;
             string sobrenome;
-            double peso=0;
-            double altura=0;
-            double imc=0;
+            double peso = 0;
+            double altura = 0;
+            double imc = 0;
             int idade = 0;
             int quantidade = 0;
             Console.WriteLine("De quantas pessoas você deseja calcular o IMC?");
             string inputQuantidade = Console.ReadLine();
             if (int.TryParse(inputQuantidade, out quantidade) == false)
                 quantidade = 0;
-            while (quantidade<1)
+            while (quantidade < 1)
             {
                 Console.WriteLine(Environment.NewLine + "Digite uma quantidade válida!" + Environment.NewLine);
                 Console.WriteLine("De quantas pessoas você deseja calcular o IMC?");
@@ -39,9 +47,9 @@ namespace CalculadoraIMC
                 if (int.TryParse(inputQuantidade, out quantidade) == false)
                     quantidade = 0;
             }
-            
-            ClassePessoa[] pessoas= new ClassePessoa[quantidade];
-           
+
+            ClassePessoa[] pessoas = new ClassePessoa[quantidade];
+
             //tabela informativa
             Console.WriteLine("                        TESTE IMC  " + Environment.NewLine);
             Console.WriteLine("       IMC              CLASSIFICAÇÃO     RISCO DE DOENÇA" + Environment.NewLine);
@@ -57,26 +65,27 @@ namespace CalculadoraIMC
                 nome = Console.ReadLine();
                 Console.WriteLine("Digite o sobrenome de " + nome + ":");
                 sobrenome = Console.ReadLine();
+
                 //pedir idade
                 //input serve armazenar o valor inserido em uma string, para verificar se são apenas números
                 //TryParse tentar converter, se não conseguir retornará como falso e substituirá por 0 (idade inválida) então entrará no while
                 //Environment independente do ambiente (sistema operacional) em que ele está, criará uma nova linha
-                Console.WriteLine("Insira sua idade:");
+                Console.WriteLine("Insira a idade de " + nome + ":");
                 string inputIdade = Console.ReadLine();
                 if (int.TryParse(inputIdade, out idade) == false)
                     idade = 0;
                 while (idade < 20 || idade > 65)
                 {
                     Console.WriteLine(Environment.NewLine + "Este IMC é apenas para adultos entre 20 e 65 anos!" + Environment.NewLine);
-                    Console.WriteLine("Insira sua idade:");
+                    Console.WriteLine("Insira a idade de " + nome + ":");
                     inputIdade = Console.ReadLine();
                     if (int.TryParse(inputIdade, out idade) == false)
                         idade = 0;
                 }
-                ClassePessoa pessoa = new ClassePessoa(idade);
+                ClassePessoa pessoa = new ClassePessoa(idade, nome, sobrenome);
                 pessoas[i] = pessoa;
                 //pedir peso
-                Console.WriteLine("Insira o seu peso:");
+                Console.WriteLine("Insira o peso de " + nome + ":");
                 String inputPeso = Console.ReadLine();
                 inputPeso = inputPeso.Replace(',', '.');
                 if (double.TryParse(inputPeso, out peso) == false)
@@ -84,70 +93,55 @@ namespace CalculadoraIMC
                 while (peso > 300 || peso < 30)
                 {
                     Console.WriteLine(Environment.NewLine + "Seu peso é inválido!" + Environment.NewLine);
-                    Console.WriteLine("Insira o seu peso:");
+                    Console.WriteLine("Insira o peso de " + nome + ":");
                     inputPeso = Console.ReadLine();
                     inputPeso = inputPeso.Replace(',', '.');
                     if (double.TryParse(inputPeso, out peso) == false)
                         peso = 0;
                 }
 
-                pessoas[i].Peso=peso;
+                pessoas[i].Peso = peso;
 
 
                 //pedir altura
 
-                Console.WriteLine("Insira sua altura");
+                Console.WriteLine("Insira a altura de " + nome + ":");
                 string inputAltura = Console.ReadLine();
                 inputAltura = inputAltura.Replace(',', '.');
                 if (double.TryParse(inputAltura, out altura) == false)
                     altura = 0;
-
                 while (altura > 2.8 || altura < 1)
                 {
                     Console.WriteLine(Environment.NewLine + "Sua altura é inválida!" + Environment.NewLine);
-                    Console.WriteLine("Insira sua altura");
+                    Console.WriteLine("Insira a altura de " + nome + ":");
                     inputAltura = Console.ReadLine();
                     inputAltura = inputAltura.Replace(',', '.');
                     if (double.TryParse(inputAltura, out altura) == false)
                         altura = 0;
                 }
                 pessoas[i].Altura = altura;
-
             }
             for (int i = 0; i < pessoas.Length; i++)
             {
-                //calculo do IMC
                 imc = pessoas[i].CalculaIMC();
-
-                //testes IMC
-                if (imc < 18.5)
-                    Console.WriteLine("Seu IMC é: " + imc + " ele indica Magreza");
-                else if (imc <= 24.9)
-                    Console.WriteLine("Seu IMC é: " + imc + " ele indica estar Normal");
-                else if (imc <= 29.9)
-                    Console.WriteLine("Seu IMC é: " + imc + " ele indica Sobrepeso");
-                else if (imc <= 39.9)
-                    Console.WriteLine("Seu IMC é: " + imc + " ele indica Obesidade");
-                else
-                    Console.WriteLine("Seu IMC é: " + imc + " ele indica Obesidade Grave");
+                Console.Write(pessoas[i].Nome + " " + pessoas[i].Sobrenome + " ");
+                Console.WriteLine(MensagemIMC(imc));
             }
-
-            
-
             Console.ReadLine();
             return;
-            //perguntar quantas pessoas deseja calcular - array
-            //metodo para pedir qual pessoa olhar o imc
-            //prog não acaba
-            //até caracter especial
-            //fechar aplicação
-            //windows Forms
-            //possibilidade de digitar a possibilidade de digitar TROCAR
-            //pedir dados da pessoa da qual eu desejo substituir pelo nome da pessoa
-            //não possuir dois João
-            //por sexo
-            //
-
+        }
+        public static string MensagemIMC(double imc)
+        {
+            if (imc < 18.5)
+                return ("Seu IMC é: " + imc + " ele indica Magreza");
+            else if (imc <= 24.9)
+                return ("Seu IMC é: " + imc + " ele indica estar Normal");
+            else if (imc <= 29.9)
+                return ("Seu IMC é: " + imc + " ele indica Sobrepeso");
+            else if (imc <= 39.9)
+                return ("Seu IMC é: " + imc + " ele indica Obesidade");
+            else
+                return ("Seu IMC é: " + imc + " ele indica Obesidade Grave");
         }
     }
 }

@@ -35,15 +35,19 @@ namespace CalculadoraIMC
             get;
             set;
         }
-        public ClassePessoa(int Idade,double Peso,double Altura)
+        public ClassePessoa(string nome, string sobrenome,int idade,double peso,double altura)
         {
-            this.Idade = Idade;
-            this.Altura = Altura;
-            this.Peso = Peso;    
+            this.Nome = nome;
+            this.Sobrenome = sobrenome;
+            this.Idade = idade;
+            this.Altura = altura;
+            this.Peso = peso;    
         }
-        public ClassePessoa(int Idade)
+        public ClassePessoa(int idade,string nome,string sobrenome)
         {
-            this.Idade = Idade;
+            this.Idade = idade;
+            this.Nome = nome;
+            this.Sobrenome = sobrenome;
         }
         public double CalculaIMC()
         {
