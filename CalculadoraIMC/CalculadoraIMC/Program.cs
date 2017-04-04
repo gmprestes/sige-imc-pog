@@ -20,7 +20,7 @@ namespace CalculadoraIMC
              * Caso o usuário digite a palavra TROCAR, programa deve permitir que ele escolha(por nome ou número, de qual pessoa deseja trocar os dados)
              * Verificar no cadastro da pessoa e na hora de trocar informações que não exista nenhum nome+sobrenome igual
              * Calcular IMC por sexo - 1/2 OK
-             * Modificar mensagens ao usuário(algumas estão para apenas uma pessoa, não se aplicando ao novo modelo)
+             * Modificar mensagens ao usuário(algumas estão para apenas uma pessoa, não se aplicando ao novo modelo) - OK
              * Pesquisar e implementar tabelas de IMC para homens e para mulheres e suas diferenças - OK
              */
 
@@ -133,7 +133,7 @@ namespace CalculadoraIMC
             for (int i = 0; i < pessoas.Length; i++)
             {
                 imc = pessoas[i].CalculaIMC();
-                Console.Write(pessoas[i].Nome + " " + pessoas[i].Sobrenome + " ");
+                Console.Write("O IMC de " + pessoas[i].Nome + " " + pessoas[i].Sobrenome + " ");
                 Console.WriteLine(MensagemIMC(imc));
             }
 
@@ -153,7 +153,7 @@ namespace CalculadoraIMC
                     for (int i = 0; i < pessoas.Length; i++)
                     {
                         imc = pessoas[i].CalculaIMC();
-                        //Verificar comando abaixo, não esta aparecendo o começo "O IMC de"...
+
                         Console.Write("O IMC de " + pessoas[i].Nome + " " + pessoas[i].Sobrenome);
                         Console.WriteLine(MensagemIMC(imc));
                     }
@@ -164,11 +164,11 @@ namespace CalculadoraIMC
                 }
                 else if (comando.Equals("SAIR"))
                 {
-                Environment.Exit(0);
+                    Environment.Exit(0);
                 }
                 else
                 {
-                Console.WriteLine(Environment.NewLine + "Comando inválido!" + Environment.NewLine);
+                    Console.WriteLine(Environment.NewLine + "Comando inválido!" + Environment.NewLine);
                 }
             }
         }
