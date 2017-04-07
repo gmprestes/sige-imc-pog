@@ -28,13 +28,14 @@ namespace CalculadoraIMC
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
 
             //criação variáveis
-            string nome;
-            string sobrenome;
+            string nome="";
+            string sobrenome="";
             double peso = 0;
             double altura = 0;
             double imc = 0;
             int idade = 0;
             int quantidade = 0;
+            
             Console.WriteLine("De quantas pessoas você deseja calcular o IMC?");
             string inputQuantidade = Console.ReadLine();
             if (int.TryParse(inputQuantidade, out quantidade) == false)
@@ -61,36 +62,29 @@ namespace CalculadoraIMC
 
             for (int i = 0; i < pessoas.Length; i++)
             {
-                Console.WriteLine("Digite o nome da pessoa:");
-                nome = Console.ReadLine();
-                Console.WriteLine("Digite o sobrenome de " + nome + ":");
-                sobrenome = Console.ReadLine();
-
-                if (i >= 1)
+                bool nomeIgual = true;
+                while (nomeIgual)
                 {
-                    while (quantidade < 1)
+                    nomeIgual = false;
+                    Console.WriteLine("Digite o nome da pessoa:");
+                    nome = Console.ReadLine();
+                    Console.WriteLine("Digite o sobrenome de " + nome + ":");
+                    sobrenome = Console.ReadLine();
+                    for (int j = 0; j < pessoas.Length; j++)
                     {
-                        for (int x = 0; x < pessoas.Length; x++)
+                        if (pessoas[j] == null)
                         {
-                            if (pessoas[i].Nome.Equals(pessoas[x].Nome) && pessoas[i].Sobrenome.Equals(pessoas[x].Nome))
-                            {
-                                Console.WriteLine(Environment.NewLine + "Essa pessoa ja foi cadastrada " + Environment.NewLine);
-                                Console.WriteLine("Digite o nome da pessoa:");
-                                nome = Console.ReadLine();
-                                Console.WriteLine("Digite o sobrenome de " + nome + ":");
-                                sobrenome = Console.ReadLine();
-                                inputQuantidade = Console.ReadLine();
-
-                                if (int.TryParse(inputQuantidade, out quantidade) == false)
-                                    quantidade = 0;
-                            }
 
                         }
-
-
+                        else if (pessoas[j].Nome.Equals(nome) && pessoas[j].Sobrenome.Equals(sobrenome))
+                        {
+                            nomeIgual = true;
+                            Console.WriteLine(Environment.NewLine + "Essa pessoa ja foi cadastrada " + Environment.NewLine);
+                        }
                     }
-
                 }
+                
+
                 //pedir idade
                 //input serve armazenar o valor inserido em uma string, para verificar se são apenas números
                 //TryParse tentar converter, se não conseguir retornará como falso e substituirá por 0 (idade inválida) então entrará no while
