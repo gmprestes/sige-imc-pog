@@ -168,7 +168,7 @@ namespace CalculadoraIMC
             for (int i = 0; i < pessoas.Length; i++)
             {
                 imc = pessoas[i].CalculaIMC();
-                Console.Write("O IMC de " + pessoas[i].Nome + " " + pessoas[i].Sobrenome + " ");
+                Console.Write(Environment.NewLine + "O IMC de " + pessoas[i].Nome + " " + pessoas[i].Sobrenome + " ");
                 Console.WriteLine(MensagemIMC(imc,pessoas[i].Sexo));
             }
 
@@ -180,11 +180,14 @@ namespace CalculadoraIMC
             while (!comando.ToUpper().Equals("SAIR"))
             {
 
-                Console.WriteLine(Environment.NewLine + "Digite Resultados  para visualizar os resultados das pessoas informadas.");
-                Console.WriteLine("Digite Pesquisar para realizar pesquisa por pessoa informada.  ");
-                Console.WriteLine("Digite Trocar  para trocar dados de pessoa informada. ");
-                Console.WriteLine("Digite Sair para encerrar o programa.");
-
+                Console.WriteLine(Environment.NewLine + " MENU DE OPÇÕES      |           AJUDA                       ");
+                Console.WriteLine(Environment.NewLine + ">--------------------| -----------------------------------------------------------<");
+                Console.WriteLine(Environment.NewLine + "       Resultados    |   para visualizar os resultados das pessoas informadas.");
+                Console.WriteLine("       Pesquisar     |   para realizar pesquisa por pessoa informada.  ");
+                Console.WriteLine("       Trocar        |   para trocar dados de pessoa informada. ");
+                Console.WriteLine("       Sair          |   para encerrar o programa.");
+                Console.WriteLine(Environment.NewLine + " >-------------------|------------------------------------------------------------<");
+                Console.WriteLine("Informe a opção: ");
                 comando = Console.ReadLine().ToUpper();
 
                 if (comando.Equals("RESULTADOS"))
@@ -194,13 +197,13 @@ namespace CalculadoraIMC
                     {
                         imc = pessoas[i].CalculaIMC();
 
-                        Console.Write("O IMC de " + pessoas[i].Nome + " " + pessoas[i].Sobrenome);
+                        Console.Write(Environment.NewLine + "O IMC de " + pessoas[i].Nome + " " + pessoas[i].Sobrenome);
                         Console.WriteLine(MensagemIMC(imc,pessoas[i].Sexo));
                     }
                 }
                 else if (comando.Equals("TROCAR"))
                 {
-                    Console.WriteLine("Digite a pesquisa:");
+                    Console.WriteLine("Informe o nome da pessoa que deseja trocar:");
                     string pesquisa = Console.ReadLine();
                     if (PesquisaPessoa(pesquisa, pessoas) == -1)
                     {
@@ -213,7 +216,7 @@ namespace CalculadoraIMC
                         while (nomeIgual)
                         {
                             nomeIgual = false;
-                            Console.WriteLine("Digite o nome da pessoa: ");
+                            Console.WriteLine("Digite o nome da nova pessoa: ");
                             nome = Console.ReadLine();
                             Console.WriteLine("Digite o sobrenome de " + nome + ":");
                             sobrenome = Console.ReadLine();
@@ -302,7 +305,7 @@ namespace CalculadoraIMC
                 }
                 else if (comando.Equals("PESQUISAR"))
                 {
-                    Console.WriteLine("Digite a pesquisa:");
+                    Console.WriteLine("Digite o nome da pessoa que deseja pesquisar:");
                     string pesquisa = Console.ReadLine();
                     if (PesquisaPessoa(pesquisa, pessoas) == -1)
                     {
