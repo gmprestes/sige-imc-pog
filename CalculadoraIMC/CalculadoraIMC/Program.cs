@@ -51,15 +51,30 @@ namespace CalculadoraIMC
             ClassePessoa[] pessoas = new ClassePessoa[quantidade];
 
             //tabela informativa
-            Console.WriteLine("                         TESTE IMC  " + Environment.NewLine);
+            Console.WriteLine("                         TABELA IMC MASCULINA " + Environment.NewLine);
             Console.WriteLine(">----------------------------------------------------------------------<" + Environment.NewLine);
             Console.WriteLine("       IMC           |     CLASSIFICAÇÃO     |    RISCO DE DOENÇA" + Environment.NewLine);
             Console.WriteLine(">------------------- | ------------------    | ------------------------<    " + Environment.NewLine);
-            Console.WriteLine("Menos de 18,5        |     Magreza           |    Elevado");
-            Console.WriteLine("Entre 18,5 e 24,9    |     Normal	     |    Sem Risco");
-            Console.WriteLine("Entre 25 e 29,9	     |     Sobrepeso	     |    Elevado");
+            Console.WriteLine("Menos de 17,9        |     Magreza  grave    |    Elevado");
+            Console.WriteLine("Entre 17,9 e 18,     |     Magreza           |    Elevado");
+            Console.WriteLine("Entre 19 e 24,9      |     Normal	     |    Sem Risco");
+            Console.WriteLine("Entre 25 e 27,7      |     Sobrepeso	     |    Elevado");
             Console.WriteLine("Entre 30 e 39,9	     |     Obesidade	     |    Muito elevado");
             Console.WriteLine("Igual ou maior de 40 |     Obesidade grave   |    Muitíssimo elevado" + Environment.NewLine);
+
+            //tabela informativa
+            Console.WriteLine("                         TABELA IMC FEMININA " + Environment.NewLine);
+            Console.WriteLine(">----------------------------------------------------------------------<" + Environment.NewLine);
+            Console.WriteLine("       IMC           |     CLASSIFICAÇÃO     |    RISCO DE DOENÇA" + Environment.NewLine);
+            Console.WriteLine(">------------------- | ------------------    | ------------------------<    " + Environment.NewLine);
+            Console.WriteLine("Menos de 15          |     Magreza grave     |    Elevado");
+            Console.WriteLine("Entre 15 e 17,9      |     Magreza           |    Elevado");
+            Console.WriteLine("Entre 18 e 24,4      |     Normal	     |    Sem Risco");
+            Console.WriteLine("Entre 24,5 e 27,2    |     Sobrepeso	     |    Elevado");
+            Console.WriteLine("Entre 30 e 39,9	     |     Obesidade	     |    Muito elevado");
+            Console.WriteLine("Igual ou maior de 40 |     Obesidade grave   |    Muitíssimo elevado" + Environment.NewLine);
+
+
 
             for (int i = 0; i < pessoas.Length; i++)
             {
@@ -154,7 +169,7 @@ namespace CalculadoraIMC
             {
                 imc = pessoas[i].CalculaIMC();
                 Console.Write("O IMC de " + pessoas[i].Nome + " " + pessoas[i].Sobrenome + " ");
-                Console.WriteLine(MensagemIMC(imc));
+                Console.WriteLine(MensagemIMC(imc,pessoas[i].Sexo));
             }
 
             // comando = "" inicializa a variável
@@ -180,7 +195,7 @@ namespace CalculadoraIMC
                         imc = pessoas[i].CalculaIMC();
 
                         Console.Write("O IMC de " + pessoas[i].Nome + " " + pessoas[i].Sobrenome);
-                        Console.WriteLine(MensagemIMC(imc));
+                        Console.WriteLine(MensagemIMC(imc,pessoas[i].Sexo));
                     }
                 }
                 else if (comando.Equals("TROCAR"))
@@ -319,18 +334,39 @@ namespace CalculadoraIMC
             }
         }
 
-        public static string MensagemIMC(double imc)
+        public static string MensagemIMC(double imc,string sexo)
         {
-            if (imc < 18.5)
-                return (" é: " + imc + " ele indica Magreza");
-            else if (imc <= 24.9)
-                return (" é: " + imc + " ele indica estar Normal");
-            else if (imc <= 29.9)
-                return (" é: " + imc + " ele indica Sobrepeso");
-            else if (imc <= 39.9)
-                return (" é: " + imc + " ele indica Obesidade");
+            if (sexo.Equals("M"))
+            {
+                if (imc < 17.9)
+                    return (" é: " + imc + " ele indica Magreza Grave");
+                else if (imc <= 18.9)
+                    return (" é: " + imc + " ele indica estar Magreza");
+                else if (imc <= 24.9)
+                    return (" é: " + imc + " ele indica Normal");
+                else if (imc <= 27.7)
+                    return (" é: " + imc + " ele indica Obesidade");
+                else if (imc <=27.8 )
+                    return (" é: " + imc + " ele indica Obesidade");
+                else
+                    return (" é: " + imc + " ele indica Obesidade Grave");
+            }
             else
-                return (" é: " + imc + " ele indica Obesidade Grave");
+            {
+                if (imc < 15)
+                    return (" é: " + imc + " ele indica Magreza Grave");
+                else if (imc <= 17.9)
+                    return (" é: " + imc + " ele indica estar Magreza");
+                else if (imc <= 24.4)
+                    return (" é: " + imc + " ele indica estar Normal");
+                else if (imc <= 27.2)
+                    return (" é: " + imc + " ele indica Sobrepeso");
+                else if (imc <= 27.3)
+                    return (" é: " + imc + " ele indica Obesidade");
+                else
+                    return (" é: " + imc + " ele indica Obesidade Grave");
+            }
+            
         }
         public static int PesquisaPessoa(string pesquisa,ClassePessoa[] pessoas)
         {
