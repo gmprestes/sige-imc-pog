@@ -39,11 +39,11 @@ namespace CalculadoraIMC
             string inputQuantidade = Console.ReadLine();
             if (int.TryParse(inputQuantidade, out quantidade) == false)
                 quantidade = 0;
-            while (quantidade < 1)
+                while (quantidade < 1)
             {
                 Console.WriteLine(Environment.NewLine + "Digite uma quantidade válida!" + Environment.NewLine);
                 Console.WriteLine("De quantas pessoas você deseja calcular o IMC?");
-                inputQuantidade = Console.ReadLine();
+                 inputQuantidade = Console.ReadLine();
                 if (int.TryParse(inputQuantidade, out quantidade) == false)
                     quantidade = 0;
             }
@@ -51,13 +51,15 @@ namespace CalculadoraIMC
             ClassePessoa[] pessoas = new ClassePessoa[quantidade];
 
             //tabela informativa
-            Console.WriteLine("                        TESTE IMC  " + Environment.NewLine);
-            Console.WriteLine("       IMC              CLASSIFICAÇÃO     RISCO DE DOENÇA" + Environment.NewLine);
-            Console.WriteLine("Menos de 18,5           Magreza             Elevado");
-            Console.WriteLine("Entre 18,5 e 24,9       Normal	            --------");
-            Console.WriteLine("Entre 25 e 29,9	        Sobrepeso	    Elevado");
-            Console.WriteLine("Entre 30 e 39,9	        Obesidade	    Muito elevado");
-            Console.WriteLine("Igual ou maior de 40    Obesidade grave	    Muitíssimo elevado" + Environment.NewLine);
+            Console.WriteLine("                         TESTE IMC  " + Environment.NewLine);
+            Console.WriteLine(">----------------------------------------------------------------------<" + Environment.NewLine);
+            Console.WriteLine("       IMC           |     CLASSIFICAÇÃO     |    RISCO DE DOENÇA" + Environment.NewLine);
+            Console.WriteLine(">------------------- | ------------------    | ------------------------<    " + Environment.NewLine);
+            Console.WriteLine("Menos de 18,5        |     Magreza           |    Elevado");
+            Console.WriteLine("Entre 18,5 e 24,9    |     Normal	     |    Sem Risco");
+            Console.WriteLine("Entre 25 e 29,9	     |     Sobrepeso	     |    Elevado");
+            Console.WriteLine("Entre 30 e 39,9	     |     Obesidade	     |    Muito elevado");
+            Console.WriteLine("Igual ou maior de 40 |     Obesidade grave   |    Muitíssimo elevado" + Environment.NewLine);
 
             for (int i = 0; i < pessoas.Length; i++)
             {
@@ -65,7 +67,7 @@ namespace CalculadoraIMC
                 while (nomeIgual)
                 {
                     nomeIgual = false;
-                    Console.WriteLine("Digite o nome da pessoa:");
+                    Console.WriteLine("Digite o nome da pessoa: ");
                     nome = Console.ReadLine();
                     Console.WriteLine("Digite o sobrenome de " + nome + ":");
                     sobrenome = Console.ReadLine();
@@ -88,39 +90,39 @@ namespace CalculadoraIMC
                 //input serve armazenar o valor inserido em uma string, para verificar se são apenas números
                 //TryParse tentar converter, se não conseguir retornará como falso e substituirá por 0 (idade inválida) então entrará no while
                 //Environment independente do ambiente (sistema operacional) em que ele está, criará uma nova linha
-                Console.WriteLine("Insira a idade de " + nome + ":");
+                Console.WriteLine("Insira a idade de " + nome +" "+sobrenome + ":");
                 string inputIdade = Console.ReadLine();
                 if (int.TryParse(inputIdade, out idade) == false)
                     idade = 0;
                 while (idade < 20 || idade > 65)
                 {
                     Console.WriteLine(Environment.NewLine + "Este IMC é apenas para adultos entre 20 e 65 anos!" + Environment.NewLine);
-                    Console.WriteLine("Insira a idade de " + nome + ":");
+                    Console.WriteLine("Insira a idade de " + nome +" "+ sobrenome + ":");
                     inputIdade = Console.ReadLine();
                     if (int.TryParse(inputIdade, out idade) == false)
                         idade = 0;
                 }
 
                 //while \/ enquanto a entrada for diferente de M e F
-                Console.WriteLine("Insira M para masculino e F para feminino:");
+                Console.WriteLine("Informe o sexo de " + nome + " " + sobrenome + " (M para masculino e F para feminino):");
                 string sexo = Console.ReadLine();
                 while (!sexo.ToUpper().Equals("M") && !sexo.ToUpper().Equals("F"))
                 {
-                    Console.WriteLine("Insira M para masculino e F para feminino:");
+                    Console.WriteLine("Informe o sexo de "+ nome +" "+ sobrenome + " (M para masculino e F para feminino):");
                     sexo = Console.ReadLine();
                 }
                 ClassePessoa pessoa = new ClassePessoa(idade, nome, sobrenome, sexo);
                 pessoas[i] = pessoa;
                 //pedir peso
-                Console.WriteLine("Insira o peso de " + nome + ":");
-                String inputPeso = Console.ReadLine();
+                Console.WriteLine("Insira o peso de " + nome +" " + sobrenome+ ":");
+                string inputPeso = Console.ReadLine();
                 inputPeso = inputPeso.Replace(',', '.');
                 if (double.TryParse(inputPeso, out peso) == false)
                     peso = 0;
                 while (peso > 300 || peso < 30)
                 {
                     Console.WriteLine(Environment.NewLine + "Este peso é inválido!" + Environment.NewLine);
-                    Console.WriteLine("Insira o peso de " + nome + ":");
+                    Console.WriteLine("Insira o peso de " + nome + " " + sobrenome + ":");
                     inputPeso = Console.ReadLine();
                     inputPeso = inputPeso.Replace(',', '.');
                     if (double.TryParse(inputPeso, out peso) == false)
@@ -132,7 +134,7 @@ namespace CalculadoraIMC
 
                 //pedir altura
 
-                Console.WriteLine("Insira a altura de " + nome + ":");
+                Console.WriteLine("Insira a altura de " + nome + " " + sobrenome + ":");
                 string inputAltura = Console.ReadLine();
                 inputAltura = inputAltura.Replace(',', '.');
                 if (double.TryParse(inputAltura, out altura) == false)
@@ -178,7 +180,12 @@ namespace CalculadoraIMC
                 }
                 else if (comando.Equals("TROCAR"))
                 {
+                        Console.Write("De quais pessoas informadas você deseja alterar os dados: ");
+                    for (int i = 0; i < pessoas.Length; i++)
+                    { 
+                        Console.Write(Environment.NewLine + " " + pessoas[i].Nome + " " + pessoas[i].Sobrenome + Environment.NewLine);
 
+                    }
                 }
                 else if (comando.Equals("SAIR"))
                 {
