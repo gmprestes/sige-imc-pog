@@ -187,6 +187,19 @@ namespace CalculadoraIMC
 
                     }
                 }
+                else if (comando.Equals("PESSOA"))
+                {
+                    Console.WriteLine("Digite a pesquisa:");
+                    string pesquisa = Console.ReadLine();
+                    if (PesquisaPessoa(pesquisa, pessoas) == -1)
+                    {
+                        Console.WriteLine("Não encontrado");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Encontrado na posição " + PesquisaPessoa(pesquisa, pessoas));
+                    }
+                }
                 else if (comando.Equals("SAIR"))
                 {
                     Environment.Exit(0);
@@ -210,6 +223,21 @@ namespace CalculadoraIMC
                 return (" é: " + imc + " ele indica Obesidade");
             else
                 return (" é: " + imc + " ele indica Obesidade Grave");
+        }
+        public static int PesquisaPessoa(string pesquisa,ClassePessoa[] pessoas)
+        {
+            for (int i = 0; i < pessoas.Length; i++)
+            {
+                if (pessoas[i].Nome.Equals(pesquisa))
+                    return i;
+                else if ((pessoas[i].Nome + " " + pessoas[i].Sobrenome).Equals(pesquisa))
+                    return i;
+                else if (i.ToString().Equals(pesquisa))
+                    return i;
+                else
+                    return -1;
+            }
+            return -1;
         }
     }
     }
