@@ -164,7 +164,12 @@ namespace CalculadoraIMC
             string comando = "";
             while (!comando.ToUpper().Equals("SAIR"))
             {
-                Console.WriteLine("Insira a palavra mágica:");
+
+                Console.WriteLine(Environment.NewLine + "Digite Resultados  para visualizar os resultados das pessoas informadas.");
+                Console.WriteLine("Digite Pesquisar para realizar pesquisa por pessoa informada.  ");
+                Console.WriteLine("Digite Trocar  para trocar dados de pessoa informada. ");
+                Console.WriteLine("Digite Sair para encerrar o programa.");
+
                 comando = Console.ReadLine().ToUpper();
 
                 if (comando.Equals("RESULTADOS"))
@@ -180,14 +185,107 @@ namespace CalculadoraIMC
                 }
                 else if (comando.Equals("TROCAR"))
                 {
-                        Console.Write("De quais pessoas informadas você deseja alterar os dados: ");
-                    for (int i = 0; i < pessoas.Length; i++)
-                    { 
-                        Console.Write(Environment.NewLine + " " + pessoas[i].Nome + " " + pessoas[i].Sobrenome + Environment.NewLine);
-
+                    Console.WriteLine("Digite a pesquisa:");
+                    string pesquisa = Console.ReadLine();
+                    if (PesquisaPessoa(pesquisa, pessoas) == -1)
+                    {
+                        Console.WriteLine("Não encontrado");
                     }
+                    else
+                    {
+                        int posicao = PesquisaPessoa(pesquisa, pessoas);
+                        bool nomeIgual = true;
+                        while (nomeIgual)
+                        {
+                            nomeIgual = false;
+                            Console.WriteLine("Digite o nome da pessoa: ");
+                            nome = Console.ReadLine();
+                            Console.WriteLine("Digite o sobrenome de " + nome + ":");
+                            sobrenome = Console.ReadLine();
+                            for (int j = 0; j < pessoas.Length; j++)
+                            {
+                                if (pessoas[j] == null)
+                                {
+
+                                }
+                                else if (pessoas[j].Nome.Equals(nome) && pessoas[j].Sobrenome.Equals(sobrenome))
+                                {
+                                    nomeIgual = true;
+                                    Console.WriteLine(Environment.NewLine + "Essa pessoa ja foi cadastrada " + Environment.NewLine);
+                                }
+                            }
+                        }
+
+
+               
+                        Console.WriteLine("Insira a idade de " + nome + " " + sobrenome + ":");
+                        string inputIdade = Console.ReadLine();
+                        if (int.TryParse(inputIdade, out idade) == false)
+                            idade = 0;
+                        while (idade < 20 || idade > 65)
+                        {
+                            Console.WriteLine(Environment.NewLine + "Este IMC é apenas para adultos entre 20 e 65 anos!" + Environment.NewLine);
+                            Console.WriteLine("Insira a idade de " + nome + " " + sobrenome + ":");
+                            inputIdade = Console.ReadLine();
+                            if (int.TryParse(inputIdade, out idade) == false)
+                                idade = 0;
+                        }
+
+                        //while \/ enquanto a entrada for diferente de M e F
+                        Console.WriteLine("Informe o sexo de " + nome + " " + sobrenome + " (M para masculino e F para feminino):");
+                        string sexo = Console.ReadLine();
+                        while (!sexo.ToUpper().Equals("M") && !sexo.ToUpper().Equals("F"))
+                        {
+                            Console.WriteLine("Informe o sexo de " + nome + " " + sobrenome + " (M para masculino e F para feminino):");
+                            sexo = Console.ReadLine();
+                        }
+                        ClassePessoa pessoa = new ClassePessoa(idade, nome, sobrenome, sexo);
+                        //pessoas[posicao] = pessoa;
+                        
+                        //pedir peso
+                        Console.WriteLine("Insira o peso de " + nome + " " + sobrenome + ":");
+                        string inputPeso = Console.ReadLine();
+                        inputPeso = inputPeso.Replace(',', '.');
+                        if (double.TryParse(inputPeso, out peso) == false)
+                            peso = 0;
+                        while (peso > 300 || peso < 30)
+                        {
+                            Console.WriteLine(Environment.NewLine + "Este peso é inválido!" + Environment.NewLine);
+                            Console.WriteLine("Insira o peso de " + nome + " " + sobrenome + ":");
+                            inputPeso = Console.ReadLine();
+                            inputPeso = inputPeso.Replace(',', '.');
+                            if (double.TryParse(inputPeso, out peso) == false)
+                                peso = 0;
+                        }
+
+                        //pessoas[posicao].Peso = peso;
+                        pessoa.Peso = peso;
+
+                        //pedir altura
+
+                        Console.WriteLine("Insira a altura de " + nome + " " + sobrenome + ":");
+                        string inputAltura = Console.ReadLine();
+                        inputAltura = inputAltura.Replace(',', '.');
+                        if (double.TryParse(inputAltura, out altura) == false)
+                            altura = 0;
+                        while (altura > 2.8 || altura < 1)
+                        {
+                            Console.WriteLine(Environment.NewLine + "Esta altura é inválida!" + Environment.NewLine);
+                            Console.WriteLine("Insira a altura de " + nome + ":");
+                            inputAltura = Console.ReadLine();
+                            inputAltura = inputAltura.Replace(',', '.');
+                            if (double.TryParse(inputAltura, out altura) == false)
+                                altura = 0;
+                        }
+                        //pessoas[PesquisaPessoa(pesquisa, pessoas)].Altura = altura;
+                        pessoa.Altura = altura;
+                        pessoas[posicao] = pessoa;
+                    }
+                    //pede as coisas
+                    //criar uma pessoa
+                    //troca
                 }
-                else if (comando.Equals("PESSOA"))
+                else if (comando.Equals("PESQUISAR"))
                 {
                     Console.WriteLine("Digite a pesquisa:");
                     string pesquisa = Console.ReadLine();
@@ -197,7 +295,17 @@ namespace CalculadoraIMC
                     }
                     else
                     {
-                        Console.WriteLine("Encontrado na posição " + PesquisaPessoa(pesquisa, pessoas));
+                        int posicao = PesquisaPessoa(pesquisa, pessoas);
+                        Console.WriteLine("Nome: " + pessoas[posicao].Nome);
+                        Console.WriteLine("Sobrenome: " + pessoas[posicao].Sobrenome);
+                        Console.WriteLine("Idade: " + pessoas[posicao].Idade);
+                        Console.WriteLine("Sexo: " + pessoas[posicao].Sexo);
+                        Console.WriteLine("Peso: " + pessoas[posicao].Peso);
+                        Console.WriteLine("Altura: " + pessoas[posicao].Altura);
+                        Console.WriteLine("IMC : " + pessoas[posicao].CalculaIMC());
+                        
+
+                       // Console.WriteLine("Encontrado na posição " + PesquisaPessoa(pesquisa, pessoas));
                     }
                 }
                 else if (comando.Equals("SAIR"))
@@ -234,8 +342,6 @@ namespace CalculadoraIMC
                     return i;
                 else if (i.ToString().Equals(pesquisa))
                     return i;
-                else
-                    return -1;
             }
             return -1;
         }
