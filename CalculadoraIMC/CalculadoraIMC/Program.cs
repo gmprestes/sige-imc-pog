@@ -22,7 +22,7 @@ namespace CalculadoraIMC
              * Modificar mensagens ao usuário(algumas estão para apenas uma pessoa, não se aplicando ao novo modelo) - OK
              * Pesquisar e implementar tabelas de IMC para homens e para mulheres e suas diferenças - OK
              */
-
+        
             //muda para cultura EUA, para utilizar ponto ao invés de vírgula
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
 
@@ -120,13 +120,13 @@ namespace CalculadoraIMC
                 {
                     Console.WriteLine("Informe o nome da pessoa que deseja trocar:");
                     string pesquisa = Console.ReadLine();
-                    if (PesquisaPessoa(pesquisa, pessoas) == -1)
+                    int posicao = PesquisaPessoa(pesquisa, pessoas);
+                    if ( posicao== -1)
                     {
                         Console.WriteLine("Não encontrado");
                     }
                     else
                     {
-                        int posicao = PesquisaPessoa(pesquisa, pessoas);
                         bool nomeIgual = true;
                         while (nomeIgual)
                         {
@@ -222,13 +222,15 @@ namespace CalculadoraIMC
                 {
                     Console.WriteLine("Digite o nome da pessoa que deseja pesquisar:");
                     string pesquisa = Console.ReadLine();
-                    if (PesquisaPessoa(pesquisa, pessoas) == -1)
+                    int posicao = PesquisaPessoa(pesquisa, pessoas);
+                    if (posicao == -1)
                     {
                         Console.WriteLine("Não encontrado");
                     }
                     else
                     {
-                        int posicao = PesquisaPessoa(pesquisa, pessoas);
+
+                        
                         Console.WriteLine("Nome: " + pessoas[posicao].Nome);
                         Console.WriteLine("Sobrenome: " + pessoas[posicao].Sobrenome);
                         Console.WriteLine("Idade: " + pessoas[posicao].Idade);
@@ -333,8 +335,7 @@ namespace CalculadoraIMC
                 return (pessoasEncontradas[0]);
             }
             else
-            {
-
+            { 
                 Console.WriteLine("Existe mais uma pessoa com esse nome:");
                 foreach (int posicao in pessoasEncontradas)
                 {
