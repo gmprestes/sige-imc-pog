@@ -22,7 +22,7 @@ namespace CalculadoraIMC
              * Modificar mensagens ao usuário(algumas estão para apenas uma pessoa, não se aplicando ao novo modelo) - OK
              * Pesquisar e implementar tabelas de IMC para homens e para mulheres e suas diferenças - OK
              */
-        
+
             //muda para cultura EUA, para utilizar ponto ao invés de vírgula
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
 
@@ -74,8 +74,6 @@ namespace CalculadoraIMC
             Console.WriteLine("Entre 30 e 39,9	     |     Obesidade	     |    Muito elevado");
             Console.WriteLine("Igual ou maior de 40 |     Obesidade grave   |    Muitíssimo elevado" + Environment.NewLine);
 
-
-
             for (int i = 0; i < pessoas.Length; i++)
             {
                 CadastrarPessoa(pessoas, i);
@@ -94,7 +92,6 @@ namespace CalculadoraIMC
             string comando = "";
             while (!comando.ToUpper().Equals("SAIR"))
             {
-
                 Console.WriteLine(Environment.NewLine + " MENU DE OPÇÕES      |           AJUDA                       ");
                 Console.WriteLine(Environment.NewLine + ">--------------------| -----------------------------------------------------------<");
                 Console.WriteLine(Environment.NewLine + "       Resultados    |   para visualizar os resultados das pessoas informadas.");
@@ -104,14 +101,11 @@ namespace CalculadoraIMC
                 Console.WriteLine(Environment.NewLine + " >-------------------|------------------------------------------------------------<");
                 Console.WriteLine("Informe a opção: ");
                 comando = Console.ReadLine().ToUpper();
-
                 if (comando.Equals("RESULTADOS"))
-
                 {
                     for (int i = 0; i < pessoas.Length; i++)
                     {
                         imc = pessoas[i].CalculaIMC();
-
                         Console.Write(Environment.NewLine + "O IMC de " + pessoas[i].Nome + " " + pessoas[i].Sobrenome);
                         Console.WriteLine(MensagemIMC(imc, pessoas[i].Sexo));
                     }
@@ -121,102 +115,14 @@ namespace CalculadoraIMC
                     Console.WriteLine("Informe o nome da pessoa que deseja trocar:");
                     string pesquisa = Console.ReadLine();
                     int posicao = PesquisaPessoa(pesquisa, pessoas);
-                    if ( posicao== -1)
+                    if (posicao == -1)
                     {
                         Console.WriteLine("Não encontrado");
                     }
                     else
                     {
-                        bool nomeIgual = true;
-                        while (nomeIgual)
-                        {
-                            nomeIgual = false;
-                            Console.WriteLine("Digite o nome da nova pessoa: ");
-                            nome = Console.ReadLine();
-                            Console.WriteLine("Digite o sobrenome de " + nome + ":");
-                            sobrenome = Console.ReadLine();
-                            for (int j = 0; j < pessoas.Length; j++)
-                            {
-                                if (pessoas[j] == null)
-                                {
-
-                                }
-                                else if (pessoas[j].Nome.Equals(nome) && pessoas[j].Sobrenome.Equals(sobrenome))
-                                {
-                                    nomeIgual = true;
-                                    Console.WriteLine(Environment.NewLine + "Essa pessoa ja foi cadastrada " + Environment.NewLine);
-                                }
-                            }
-                        }
-
-
-
-                        Console.WriteLine("Insira a idade de " + nome + " " + sobrenome + ":");
-                        string inputIdade = Console.ReadLine();
-                        if (int.TryParse(inputIdade, out idade) == false)
-                            idade = 0;
-                        while (idade < 20 || idade > 65)
-                        {
-                            Console.WriteLine(Environment.NewLine + "Este IMC é apenas para adultos entre 20 e 65 anos!" + Environment.NewLine);
-                            Console.WriteLine("Insira a idade de " + nome + " " + sobrenome + ":");
-                            inputIdade = Console.ReadLine();
-                            if (int.TryParse(inputIdade, out idade) == false)
-                                idade = 0;
-                        }
-
-                        //while \/ enquanto a entrada for diferente de M e F
-                        Console.WriteLine("Informe o sexo de " + nome + " " + sobrenome + " (M para masculino e F para feminino):");
-                        string sexo = Console.ReadLine();
-                        while (!sexo.ToUpper().Equals("M") && !sexo.ToUpper().Equals("F"))
-                        {
-                            Console.WriteLine("Informe o sexo de " + nome + " " + sobrenome + " (M para masculino e F para feminino):");
-                            sexo = Console.ReadLine();
-                        }
-                        ClassePessoa pessoa = new ClassePessoa(idade, nome, sobrenome, sexo);
-                        //pessoas[posicao] = pessoa;
-
-                        //pedir peso
-                        Console.WriteLine("Insira o peso de " + nome + " " + sobrenome + ":");
-                        string inputPeso = Console.ReadLine();
-                        inputPeso = inputPeso.Replace(',', '.');
-                        if (double.TryParse(inputPeso, out peso) == false)
-                            peso = 0;
-                        while (peso > 300 || peso < 30)
-                        {
-                            Console.WriteLine(Environment.NewLine + "Este peso é inválido!" + Environment.NewLine);
-                            Console.WriteLine("Insira o peso de " + nome + " " + sobrenome + ":");
-                            inputPeso = Console.ReadLine();
-                            inputPeso = inputPeso.Replace(',', '.');
-                            if (double.TryParse(inputPeso, out peso) == false)
-                                peso = 0;
-                        }
-
-                        //pessoas[posicao].Peso = peso;
-                        pessoa.Peso = peso;
-
-                        //pedir altura
-
-                        Console.WriteLine("Insira a altura de " + nome + " " + sobrenome + ":");
-                        string inputAltura = Console.ReadLine();
-                        inputAltura = inputAltura.Replace(',', '.');
-                        if (double.TryParse(inputAltura, out altura) == false)
-                            altura = 0;
-                        while (altura > 2.8 || altura < 1)
-                        {
-                            Console.WriteLine(Environment.NewLine + "Esta altura é inválida!" + Environment.NewLine);
-                            Console.WriteLine("Insira a altura de " + nome + ":");
-                            inputAltura = Console.ReadLine();
-                            inputAltura = inputAltura.Replace(',', '.');
-                            if (double.TryParse(inputAltura, out altura) == false)
-                                altura = 0;
-                        }
-                        //pessoas[PesquisaPessoa(pesquisa, pessoas)].Altura = altura;
-                        pessoa.Altura = altura;
-                        pessoas[posicao] = pessoa;
+                        CadastrarPessoa(pessoas, posicao);
                     }
-                    //pede as coisas
-                    //criar uma pessoa
-                    //troca
                 }
                 else if (comando.Equals("PESQUISAR"))
                 {
@@ -229,8 +135,6 @@ namespace CalculadoraIMC
                     }
                     else
                     {
-
-                        
                         Console.WriteLine("Nome: " + pessoas[posicao].Nome);
                         Console.WriteLine("Sobrenome: " + pessoas[posicao].Sobrenome);
                         Console.WriteLine("Idade: " + pessoas[posicao].Idade);
@@ -238,9 +142,6 @@ namespace CalculadoraIMC
                         Console.WriteLine("Peso: " + pessoas[posicao].Peso);
                         Console.WriteLine("Altura: " + pessoas[posicao].Altura);
                         Console.WriteLine("IMC : " + pessoas[posicao].CalculaIMC());
-
-
-                        // Console.WriteLine("Encontrado na posição " + PesquisaPessoa(pesquisa, pessoas));
                     }
                 }
                 else if (comando.Equals("SAIR"))
@@ -286,7 +187,6 @@ namespace CalculadoraIMC
                 else
                     return (" é: " + imc + " ele indica Obesidade Grave");
             }
-
         }
 
         public static int PesquisaPessoa(string pesquisa, ClassePessoa[] pessoas)
@@ -295,22 +195,7 @@ namespace CalculadoraIMC
             List<int> pessoasEncontradas = new List<int>();
             for (int i = 0; i < pessoas.Length; i++)
             {
-                if (pessoas[i].Nome.ToUpper().Equals(pesquisa))
-                {
-                    if (!pessoasEncontradas.Contains(i))
-                        pessoasEncontradas.Add(i);
-                }
-                else if ((pessoas[i].Nome.ToUpper() + " " + pessoas[i].Sobrenome.ToUpper()).Equals(pesquisa))
-                {
-                    if (!pessoasEncontradas.Contains(i))
-                        pessoasEncontradas.Add(i);
-               }       
-                else if (i.ToString().Equals(pesquisa))
-                {
-                    if (!pessoasEncontradas.Contains(i))
-                        pessoasEncontradas.Add(i);
-                }
-                else if (pessoas[i].Nome.ToUpper().Contains(pesquisa))
+                if (pessoas[i].Nome.ToUpper().Contains(pesquisa))
                 {
                     if (!pessoasEncontradas.Contains(i))
                         pessoasEncontradas.Add(i);
@@ -335,18 +220,28 @@ namespace CalculadoraIMC
                 return (pessoasEncontradas[0]);
             }
             else
-            { 
+            {
                 Console.WriteLine("Existe mais uma pessoa com esse nome:");
                 foreach (int posicao in pessoasEncontradas)
                 {
-                    Console.WriteLine("Posição: " + posicao + "| Nome: " + pessoas[posicao].Nome);                   
+                    Console.WriteLine("Posição: " + posicao + "| Nome: " + pessoas[posicao].Nome);
                 }
-                Console.WriteLine("Digite o número da pessoa que deseja escolher:");
-                int posicaoEscolhida=Convert.ToInt16(Console.ReadLine());
+                int posicaoEscolhida=0;
+                bool valido = false;
+                while (!valido)
+                {
+                    Console.WriteLine("Digite o número da pessoa que deseja escolher:");
+                    posicaoEscolhida = Convert.ToInt16(Console.ReadLine());
+                    if (pessoasEncontradas.Contains(posicaoEscolhida)){
+                        valido = true;
+                    }
+                }
+                
+
                 return (posicaoEscolhida);
             }
         }
-     
+
         public static void CadastrarPessoa(ClassePessoa[] pessoas, int posicao)
         {
             string nome = "";
